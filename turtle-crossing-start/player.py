@@ -33,7 +33,7 @@ class Player(Turtle):
         self.goto(self.x_move, self.y_move)
 
     def finish(self):
-        if self.ycor() == FINISH_LINE_Y:
+        if self.ycor() >= FINISH_LINE_Y:
             self.hideturtle()
             self.goto(STARTING_POSITION)
             self.x_move = STARTING_POSITION[0]

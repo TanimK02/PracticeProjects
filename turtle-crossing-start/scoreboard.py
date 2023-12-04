@@ -1,6 +1,6 @@
 from turtle import Turtle
 
-POSITION = (0, 265)
+POSITION = (-280, 265)
 FONT = ("Courier", 24, "normal")
 
 
@@ -17,8 +17,17 @@ class Scoreboard(Turtle):
         self.penup()
         self.hideturtle()
         self.setpos(POSITION)
-        self.write(arg=f"Score: {self.score}", align='center', font=FONT)
+        self.write(arg=f"Level: {self.score}", align='left', font=FONT)
 
     def add_score(self):
         self.score += 1
         self.update_scoreboard()
+
+    def lose(self):
+        self.clear()
+        self.penup()
+        self.hideturtle()
+        self.setpos(0,0)
+        self.write(arg=f"YOU LOST", align='center', font=("Courier", 48, "normal"))
+        self.setpos(0,-48)
+        self.write(arg=f"FINAL LEVEL:{self.score}", align='center', font=("Courier", 48, "normal"))
