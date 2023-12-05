@@ -33,14 +33,8 @@ while len(correct_guesses) < 50:
     answer_state = answer_state.title()
 
     if answer_state == "Exit":
-        states_to_learn_list = []
-        states_to_learn = {"state": states_to_learn_list}
-
-        for state in states:
-            if state not in correct_guesses:
-                states_to_learn_list.append(state)
-
-        new = pandas.DataFrame(states_to_learn)
+        states_to_learn_list = [state for state in states if state not in correct_guesses]
+        new = pandas.DataFrame(states_to_learn_list)
         new.to_csv('states_to_learn.csv')
         break
     if answer_state in states:
