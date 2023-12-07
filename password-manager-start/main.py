@@ -2,6 +2,8 @@ from tkinter import *
 from tkinter import messagebox
 import random
 import pyperclip
+import json
+
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
@@ -29,21 +31,58 @@ def generate_password():
     pyperclip.copy(final)
     messagebox.showinfo(message='Password saved to clipboard')
 
+
 # ---------------------------- SAVE PASSWORD ------------------------------- #
+
+
+def find_pass():
+    try:
+        with open('data.json', 'r') as data_read:
+            pass_data = json.load(data_read)
+            result = pass_data[website_entry.get()]
+    except FileNotFoundError:
+        open('data.json', 'w')
+    except ValueError:
+        messagebox.showinfo(message='Website not found')
+    else:
+        email = result['email']
+        password = result['password']
+        messagebox.showinfo(message=f'Email/Username: {email}\nPassword: {password}')
 
 
 def save_pass():
     website = website_entry.get()
     user = username_entry.get()
     password = password_entry.get()
+    new_data = {
+        website: {
+            'email': user,
+            'password': password
+        }
+    }
     if len(website) == 0 or len(user) == 0 or len(password) == 0:
         messagebox.showinfo(title='Oops', message="Please don't leave any fields empty!")
     else:
         is_ok = messagebox.askokcancel(title=website, message=f"These are the details entered: \n User/Email: {user}"
                                                               f" \n Password: {password} \nIs it ok to save?")
         if is_ok:
-            with open('data.txt', 'a') as data:
-                data.write(f"{website} | {user} | {password}\n")
+            try:
+                with open('data.json', 'r') as data_file:
+                    # reading old data
+                    data = json.load(data_file)
+            except FileNotFoundError:
+                with open('data.json', 'w') as data_file:
+                    json.dump(new_data, data_file, indent=6)
+            except ValueError:
+                with open('data.json', 'w') as data_file:
+                    json.dump(new_data, data_file, indent=6)
+            else:
+                # updating old data with new data
+                data.update(new_data)
+                with open('data.json', 'w') as data_file:
+                    # saving updated data
+                    json.dump(data, data_file, indent=6)
+            finally:
                 website_entry.delete(0, END)
                 password_entry.delete(0, END)
 
@@ -59,9 +98,12 @@ img = PhotoImage(file='logo.png')
 canvas.create_image(100, 100, image=img)
 canvas.grid(column=1, row=0)
 website_label = Label(text="Website:", font=('Arial', 14), fg='black', bg='white')
-website_entry = Entry(width=35, bg='white', fg='black', highlightthickness=0.1, borderwidth=0.5)
-website_entry.grid(column=1, row=1, columnspan=2)
+website_entry = Entry(width=21, bg='white', fg='black', highlightthickness=0.1, borderwidth=0.5)
+website_entry.grid(column=1, row=1)
 website_label.grid(column=0, row=1)
+search = Button(width=10, border=0, highlightbackground='white', borderwidth=0, highlightthickness=0.5,
+                text='Search', command=find_pass)
+search.grid(column=2, row=1)
 username_label = Label(text="Email/Username:", font=('Arial', 14), fg='black', bg='white')
 username_entry = Entry(width=35, bg='white', fg='black', highlightthickness=0.1, borderwidth=0.5)
 username_entry.grid(column=1, row=2, columnspan=2)
