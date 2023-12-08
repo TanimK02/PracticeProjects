@@ -27,7 +27,16 @@ alphabet_dict = {row.letter: row.code for (index, row) in alphabet_list.iterrows
 
 
 # #TODO 2. Create a list of the phonetic code words from a word that the user inputs.
-word = input('Enter name or word: ').upper()
 
-phonetic = [alphabet_dict[letter] for letter in word]
-print(phonetic)
+def gen_phonetic():
+    word = input('Enter name or word: ').upper()
+    try:
+        phonetic = [alphabet_dict[letter] for letter in word]
+    except KeyError:
+        print("Sorry only letters are accepted")
+        gen_phonetic()
+    else:
+        print(phonetic)
+
+
+gen_phonetic()
