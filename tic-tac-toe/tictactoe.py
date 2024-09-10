@@ -115,7 +115,7 @@ else:
 
 os.system('clear')
 if game.winner is None:
-    print(f"{game.winner} Wins!")
+    print(f"No one wins!")
 else:
     print(f"{game.winner} Wins!")
 game.print_board()

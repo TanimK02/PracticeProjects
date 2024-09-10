@@ -63,6 +63,5 @@ class CarManager():
         for car in self.list:
                 car.hideturtle()
                 car.clear()
-        self.list = []
         self.amount_car = randint(6,10)
 

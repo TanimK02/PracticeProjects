@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="376270eb-9aea-48a0-91c7-c2a213000940" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/scoreboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/scoreboard.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/snake.py" beforeDir="false" afterPath="$PROJECT_DIR$/snake.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../turtle-crossing-start/car_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/../turtle-crossing-start/car_manager.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
